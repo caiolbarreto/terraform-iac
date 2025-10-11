@@ -1,0 +1,23 @@
+# Terraform State Files
+*.tfstate
+*.tfstate.*.backup
+.terraform.tfstate.lock.info
+
+# Terraform Local Cache and Provider Downloads
+.terraform/
+
+# Terraform Crash Logs
+crash.log
+
+# Terraform Plan Files (if saved locally)
+*.tfplan
+
+# Variable Definition Files (if containing sensitive information)
+*.tfvars
+*.tfvars.json
+
+# Override Files (if not intended for shared configuration)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
