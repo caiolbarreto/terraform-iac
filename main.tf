@@ -19,3 +19,21 @@ module "cloudfront" {
 
   depends_on = [module.s3]
 }
+
+module "ecr" {
+  source              = "./modules/ecr"
+  ecr_repository_name = "rocketseat-cicd"
+
+  ecr_tags = {
+    Iac = true
+  }
+}
+
+module "iam" {
+  source                 = "./modules/iam"
+  github_repository_name = "caiolbarreto/rocketseat-cicd"
+
+  iam_tags = {
+    Iac = true
+  }
+}
