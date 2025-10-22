@@ -38,6 +38,25 @@ resource "aws_iam_role" "ecr_role" {
   tags = var.iam_tags
 }
 
+resource "aws_iam_role" "app_runner_role" {
+  name = "app-runner-role"
+  assume_role_policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Sid" : "Statement1",
+        "Action" : "sts:AssumeRole",
+        "Principal" : {
+          "Service" : "build.apprunner.amazonaws.com"
+        }
+      }
+    ]
+  })
+
+  tags = var.iam_tags
+}
+
 resource "aws_iam_role_policy" "ecr_policy" {
   name = "ecr-app-permission"
   role = aws_iam_role.ecr_role.id
@@ -45,7 +64,22 @@ resource "aws_iam_role_policy" "ecr_policy" {
     Version = "2012-10-17"
     Statement = [
       {
-        Sid = "Statement1"
+        "Sid" : "Statement1",
+        "Effect" : "Allow",
+        "Action" : "apprunner:*",
+        "Resource" : "*"
+      },
+      {
+        "Sid" : "Statement2",
+        "Effect" : "Allow",
+        "Action" : [
+          "iam:PassRole",
+          "iam:CreateServiceLinkedRole",
+        ],
+        "Resource" : "*"
+      },
+      {
+        Sid = "Statement3"
         Action = [
           "ecr:GetAuthorizationToken",
           "ecr:GetDownloadUrlForLayer",
@@ -60,4 +94,9 @@ resource "aws_iam_role_policy" "ecr_policy" {
       }
     ]
   })
+}
+
+resource "aws_iam_role_policy_attachment" "app_runner_read_only_policy_attachment" {
+  role       = aws_iam_role.app_runner_role.id
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 }
