@@ -10,14 +10,12 @@ terraform {
     bucket  = "terraform-state-bucket-tf-caio-us-east-1"
     key     = "terraform.tfstate"
     region  = "us-east-1"
-    profile = "caiobarreto"
     encrypt = true
   }
 }
 
 provider "aws" {
-  region  = "us-east-1"
-  profile = "caiobarreto"
+  region = "us-east-1"
 }
 
 resource "aws_s3_bucket" "terraform_state" {
