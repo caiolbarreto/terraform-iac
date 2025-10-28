@@ -36,3 +36,32 @@ resource "aws_iam_role_policy" "ecr_policy" {
     ]
   })
 }
+
+resource "aws_iam_role_policy" "tf_policy" {
+  name = "tf-permission"
+  role = aws_iam_role.tf_role.id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        "Sid" : "Statement1",
+        "Effect" : "Allow",
+        "Action" : "ecr:*",
+        "Resource" : "*"
+      },
+      {
+        "Sid" : "Statement2",
+        "Effect" : "Allow",
+        "Action" : "iam:*",
+        "Resource" : "*"
+      },
+      {
+        "Sid" : "Statement3",
+        "Effect" : "Allow",
+        "Action" : "s3:*",
+        "Resource" : "*"
+      },
+    ]
+  })
+}
+
