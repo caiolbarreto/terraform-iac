@@ -32,7 +32,7 @@ module "ecr" {
 module "iam" {
   source                           = "./modules/iam"
   api_cicd_github_repository_name  = "caiolbarreto/rocketseat-cicd"
-  terraform_github_repository_name = "caiolbarreto/project-iac"
+  terraform_github_repository_name = "caiolbarreto/terraform-iac"
 
   iam_tags = {
     Iac = true
