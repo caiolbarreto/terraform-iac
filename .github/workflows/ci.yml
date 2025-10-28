@@ -33,7 +33,7 @@ jobs:
         run: terraform init
 
       - name: Run Terraform format
-        run: terraform format -check
+        run: terraform fmt -check
 
       - name: Run Terraform plan
         run: terraform plan
