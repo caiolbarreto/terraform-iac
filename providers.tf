@@ -7,16 +7,16 @@ terraform {
   }
 
   backend "s3" {
-    bucket  = "terraform-state-bucket-tf-caio"
+    bucket  = "terraform-state-bucket-tf-caio-us-east-1"
     key     = "terraform.tfstate"
-    region  = "sa-east-1"
+    region  = "us-east-1"
     profile = "caiobarreto"
     encrypt = true
   }
 }
 
 provider "aws" {
-  region  = "sa-east-1"
+  region  = "us-east-1"
   profile = "caiobarreto"
 }
 

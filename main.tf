@@ -1,6 +1,6 @@
 module "s3" {
   source         = "./modules/s3"
-  s3_bucket_name = "rocketseat-iac"
+  s3_bucket_name = "rocketseat-iac-v2"
 
   s3_tags = {
     Iac = true
@@ -30,8 +30,9 @@ module "ecr" {
 }
 
 module "iam" {
-  source                 = "./modules/iam"
-  github_repository_name = "caiolbarreto/rocketseat-cicd"
+  source                           = "./modules/iam"
+  api_cicd_github_repository_name  = "caiolbarreto/rocketseat-cicd"
+  terraform_github_repository_name = "caiolbarreto/project-iac"
 
   iam_tags = {
     Iac = true
